@@ -46,6 +46,17 @@ export class MyApp {
   private handlerNotifications() {
     this.oneSignal.startInit('b417fa2e-b728-4e1c-ab53-aac30da8bf3d', '164948729696');
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+
+    
+    this.sendUserOneSignalTags();//#########DEMO#############
+    
+    //recibo la notificación
+    this.oneSignal.handleNotificationReceived()
+      .subscribe(jsonData => {
+        console.log('notificationReceived: ' + JSON.stringify(jsonData));
+      });
+
+    //si abro la notificación se ejecuta este código
     this.oneSignal.handleNotificationOpened()
       .subscribe(jsonData => {
         let alert = this.alertCtrl.create({
@@ -57,6 +68,15 @@ export class MyApp {
         console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
       });
     this.oneSignal.endInit();
+  }
+
+  //Función para enviar tags de mis usuarios para luego poder hacer segmentación
+  sendUserOneSignalTags(){
+    this.oneSignal.sendTags({ key1: "value1", key2: "value2" });
+    alert("tags sent")
+    this.oneSignal.getTags().then((tags)=>{
+      console.log("tags recibidos: "+JSON.stringify(tags))
+    })
   }
 
   openPage(page) {
