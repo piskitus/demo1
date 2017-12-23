@@ -10,6 +10,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IBeacon } from '@ionic-native/ibeacon';
 import { OneSignal } from '@ionic-native/onesignal';
+import { Geofence } from '@ionic-native/geofence';
+import { UtilitiesProvider } from '../providers/utilities/utilities';
+import { GeofencesProvider } from '../providers/geofences/geofences';
+
 
 
 @NgModule({
@@ -33,7 +37,10 @@ import { OneSignal } from '@ionic-native/onesignal';
     SplashScreen,
     IBeacon,
     OneSignal,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Geofence,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UtilitiesProvider,
+    GeofencesProvider
   ]
 })
 export class AppModule {}

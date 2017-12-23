@@ -84,4 +84,5 @@
     <plugin name="com.unarin.cordova.beacon" spec="~3.5.2" />
     <engine name="android" spec="~6.2.3" />
     <plugin name="onesignal-cordova-plugin" spec="^2.2.5" />
+    <plugin name="cordova-plugin-geofence" spec="^0.7.0" />
 </widget>

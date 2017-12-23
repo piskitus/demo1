@@ -7,6 +7,8 @@ import { OneSignal } from '@ionic-native/onesignal';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
+import { GeofencesProvider } from '../providers/geofences/geofences';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -21,7 +23,8 @@ export class MyApp {
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
     private oneSignal: OneSignal,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    public geofencesProvider: GeofencesProvider) {
 
     this.initializeApp();
 
@@ -39,11 +42,12 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.handlerNotifications();
+      this.handlerOneSignalNotifications();
+      this.geofencesProvider.initializeGeofences();
     });
   }
 
-  private handlerNotifications() {
+  private handlerOneSignalNotifications() {
     this.oneSignal.startInit('b417fa2e-b728-4e1c-ab53-aac30da8bf3d', '164948729696');
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
 
