@@ -17,7 +17,7 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform,
     public statusBar: StatusBar, 
@@ -30,8 +30,17 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Home', component: HomePage, icon: 'home' },
+      { title: 'Presentación evento', component: 'EventPage', icon: 'star' },
+      { title: 'Sede', component: 'LocationPage', icon: 'locate' },
+      { title: 'Horarios', component: 'TimetablePage', icon: 'time' },
+      { title: 'Ponentes', component: 'SpeakersPage', icon: 'people' },
+      { title: 'Documentación', component: 'DocumentationPage', icon: 'attach' },
+      { title: 'Imágenes', component: 'ImagesPage', icon: 'images' },
+      { title: 'Video', component: 'VideoPage', icon: 'logo-youtube' },
+      { title: 'Chat', component: 'ChatPage', icon: 'chatbubbles' },
+      { title: 'List', component: ListPage, icon: 'plane' },
+      { title: 'Geofences', component: 'GeofencesPage', icon: 'globe' }
     ];
 
   }
@@ -63,12 +72,12 @@ export class MyApp {
     //si abro la notificación se ejecuta este código
     this.oneSignal.handleNotificationOpened()
       .subscribe(jsonData => {
-        let alert = this.alertCtrl.create({
-          title: jsonData.notification.payload.title,
-          subTitle: jsonData.notification.payload.body,
-          buttons: ['OK']
-        });
-        alert.present();
+        // let alert = this.alertCtrl.create({
+        //   title: jsonData.notification.payload.title,
+        //   subTitle: jsonData.notification.payload.body,
+        //   buttons: ['OK']
+        // });
+        // alert.present();
         console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
       });
     this.oneSignal.endInit();
@@ -77,7 +86,6 @@ export class MyApp {
   //Función para enviar tags de mis usuarios para luego poder hacer segmentación
   sendUserOneSignalTags(){
     this.oneSignal.sendTags({ key1: "value1", key2: "value2" });
-    alert("tags sent")
     this.oneSignal.getTags().then((tags)=>{
       console.log("tags recibidos: "+JSON.stringify(tags))
     })

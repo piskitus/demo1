@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Geofences</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <button block ion-button color="danger-color" (click)="geofencesProvider.deleteGeofences()">Borrar Geovallas</button>
+  <button block ion-button color="success-color" (click)="geofencesProvider.addGeofences()">Añadir Geovallas</button>
+  <button block ion-button color="info-color" (click)="getGeofences()">Ver Geovallas</button>
+
+  <ion-item *ngFor="let geo of geofences">
+    <div>{{geo.notification.text}}</div>
+    <div>{{geo.notification.title}}</div>
+  </ion-item>
+
+
+</ion-content>

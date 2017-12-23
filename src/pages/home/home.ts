@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { GeofencesProvider } from '../../providers/geofences/geofences';
+
 
 @Component({
   selector: 'page-home',
@@ -8,12 +8,8 @@ import { GeofencesProvider } from '../../providers/geofences/geofences';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public geofencesProvider: GeofencesProvider) {
+  constructor(public navCtrl: NavController) {
 
-  }
-
-  deleteGeofences(){
-    this.geofencesProvider.deleteGeofences();
   }
 
 }

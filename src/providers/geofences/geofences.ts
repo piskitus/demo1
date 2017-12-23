@@ -118,7 +118,8 @@ export class GeofencesProvider {
 
   deleteGeofences(){
       this.geofence.removeAll().then( //Borrar todas las Geofences
-        () => { console.log("💛 Geofences borradas")},
+        () => { console.log("💛 Geofences borradas")
+              },
         (err) => { console.log("💛Error al borrar geofences")}
       )
   }
