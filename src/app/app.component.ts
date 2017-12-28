@@ -9,14 +9,21 @@ import { ListPage } from '../pages/list/list';
 
 import { GeofencesProvider } from '../providers/geofences/geofences';
 
+import { AuthProvider } from '../providers/auth/auth';
+import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
+import { UtilitiesProvider } from '../providers/utilities/utilities';
+
+
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
-
+  //rootPage: any = HomePage; //Se escribe sin comillas si viene de un import
+  rootPage: any = 'LoadingPage';//si ponemos comillas no necesitamos importarlo, se carga utilizando lazy loaded
+  user: any = {};
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform,
@@ -24,7 +31,11 @@ export class MyApp {
     public splashScreen: SplashScreen,
     private oneSignal: OneSignal,
     private alertCtrl: AlertController,
-    public geofencesProvider: GeofencesProvider) {
+    public geofencesProvider: GeofencesProvider,
+    private auth: AuthProvider,
+    public dbFirebase: FirebaseDbProvider,
+    public utilitiesProvider: UtilitiesProvider,
+) {
 
     this.initializeApp();
 
@@ -51,10 +62,36 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      //this.handlerOneSignalNotifications(); //Comentar esta linea para iOS devApp
+      this.handlerOneSignalNotifications(); //Comentar esta linea para iOS devApp
       this.geofencesProvider.initializeGeofences();
+
+  
+      this.auth.Session.subscribe(session => {
+        if (session) {
+
+          setTimeout(() => {
+            //this.splashScreen.hide();
+            this.rootPage = HomePage;
+
+          }, 3000);
+          this.toastSalutation();
+          //this.startBeaconProvider();//Inicializo la búsqueda de beacons y regiones
+
+        }
+        else {
+          console.log('➡️ redirect LoginPage');
+          setTimeout(() => {
+            //this.splashScreen.hide();
+            this.rootPage = 'LoginPage';
+          }, 3000);
+        }
+      });
+
+
+
     });
   }
+
 
   private handlerOneSignalNotifications() {
     this.oneSignal.startInit('b417fa2e-b728-4e1c-ab53-aac30da8bf3d', '164948729696');
@@ -95,5 +132,13 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  toastSalutation() {
+    console.log("toastSalutation")
+    this.dbFirebase.getUserData().then((user) => {
+      this.user.name = user.val().name;
+      this.utilitiesProvider.showToast('👋😀 Bienvenid@  ' + this.user.name, 2000, 'info', false);
+    })
   }
 }

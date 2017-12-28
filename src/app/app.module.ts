@@ -14,7 +14,20 @@ import { Geofence } from '@ionic-native/geofence';
 import { UtilitiesProvider } from '../providers/utilities/utilities';
 import { GeofencesProvider } from '../providers/geofences/geofences';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthProvider } from '../providers/auth/auth';
+import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
 
+export const firebaseConfig = {
+  apiKey: "AIzaSyAWas-Z3A2DVGswCM6NuRAYHOldEzb3HyE",
+  authDomain: "piskitus-demoseat.firebaseapp.com",
+  databaseURL: "https://piskitus-demoseat.firebaseio.com",
+  projectId: "piskitus-demoseat",
+  storageBucket: "piskitus-demoseat.appspot.com",
+  messagingSenderId: "164948729696"
+};
 
 @NgModule({
   declarations: [
@@ -25,6 +38,9 @@ import { GeofencesProvider } from '../providers/geofences/geofences';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,7 +56,9 @@ import { GeofencesProvider } from '../providers/geofences/geofences';
     Geofence,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UtilitiesProvider,
-    GeofencesProvider
+    GeofencesProvider,
+    AuthProvider,
+    FirebaseDbProvider
   ]
 })
 export class AppModule {}
