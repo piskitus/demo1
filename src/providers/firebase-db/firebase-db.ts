@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-//import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'; //versión antigua
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';//versión nueva
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated'; //versión antigua
+//import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';//versión nueva
 import { AuthProvider } from '../auth/auth';
 
 @Injectable()

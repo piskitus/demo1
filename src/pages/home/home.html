@@ -1,18 +1,50 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+  <!-- <ion-navbar>
+    <button ion-button menuToggle icon-only>
       <ion-icon name="menu"></ion-icon>
+      <ion-icon name="home"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="cerrarSesion()" color="danger-color">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+<ion-title>Home</ion-title>
+  </ion-navbar> -->
+
+    <ion-navbar>
+      <ion-buttons left>
+        <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+          <ion-icon name="home"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Home</ion-title>
+      <ion-buttons right>
+        <button ion-button icon-only (click)="cerrarSesion()" color="danger-color">
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
+
+
+
+
+
+
+
+<ion-content padding>
+  <h3 align="justify">Optimizamos la comunicación y el marketing de proximidad geolocalizando a los visitantes de todo tipo de eventos, comunicando
+  con ellos de forma personalizada.</h3>
+
+  <!-- <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  </p> -->
 
   <button ion-button secondary menuToggle>Toggle Menu</button>
+  <button ion-button color="danger-color">Más información</button>
 </ion-content>

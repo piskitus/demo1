@@ -3,15 +3,16 @@ import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { OneSignal } from '@ionic-native/onesignal';
+import { IBeacon } from '@ionic-native/ibeacon';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
 import { GeofencesProvider } from '../providers/geofences/geofences';
-
 import { AuthProvider } from '../providers/auth/auth';
 import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
 import { UtilitiesProvider } from '../providers/utilities/utilities';
+import { BeaconProvider } from '../providers/beacon/beacon';
 
 
 
@@ -35,6 +36,8 @@ export class MyApp {
     private auth: AuthProvider,
     public dbFirebase: FirebaseDbProvider,
     public utilitiesProvider: UtilitiesProvider,
+    private beaconProvider: BeaconProvider,
+    private ibeacon: IBeacon,
 ) {
 
     this.initializeApp();
@@ -75,7 +78,7 @@ export class MyApp {
 
           }, 3000);
           this.toastSalutation();
-          //this.startBeaconProvider();//Inicializo la búsqueda de beacons y regiones
+          this.startBeaconProvider();//Inicializo la búsqueda de beacons y regiones
 
         }
         else {
@@ -134,6 +137,19 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
+
+  //Inicio la búsqueda de beacons
+  startBeaconProvider() {
+    //Enciendo bluetooth al abrir la aplicación
+    this.ibeacon.enableBluetooth();
+
+    //Arranco la búsqueda de beacons pasándole la Región a escanear el valor major y el valor minor
+    //BeaconRegion(identifier, uuid, major, minor, notifyEntryStateOnDisplay)
+    //this.beaconProvider.start('Estimote','b9407f30-f5f8-466e-aff9-25556b57fe6d');
+    this.beaconProvider.start('UPC', '6a1a5d49-a1bd-4ae8-bdcb-f2ee498e609a');
+  }
+  
+
   toastSalutation() {
     console.log("toastSalutation")
     this.dbFirebase.getUserData().then((user) => {
@@ -141,4 +157,5 @@ export class MyApp {
       this.utilitiesProvider.showToast('👋😀 Bienvenid@  ' + this.user.name, 2000, 'info', false);
     })
   }
+
 }

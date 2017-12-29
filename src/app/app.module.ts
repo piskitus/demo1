@@ -13,12 +13,14 @@ import { OneSignal } from '@ionic-native/onesignal';
 import { Geofence } from '@ionic-native/geofence';
 import { UtilitiesProvider } from '../providers/utilities/utilities';
 import { GeofencesProvider } from '../providers/geofences/geofences';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated'; //El deprecated es para la v4, v5 no la uso aún
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthProvider } from '../providers/auth/auth';
 import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
+import { BeaconProvider } from '../providers/beacon/beacon';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAWas-Z3A2DVGswCM6NuRAYHOldEzb3HyE",
@@ -58,7 +60,9 @@ export const firebaseConfig = {
     UtilitiesProvider,
     GeofencesProvider,
     AuthProvider,
-    FirebaseDbProvider
+    FirebaseDbProvider,
+    BeaconProvider,
+    LocalNotifications
   ]
 })
 export class AppModule {}
