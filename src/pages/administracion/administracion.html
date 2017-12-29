@@ -1,0 +1,221 @@
+<ion-header>
+  <ion-navbar>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Panel de administración</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="cerrarPaginaAdministracion()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div [ngSwitch]="segment">
+    <ion-list *ngSwitchCase="'beacons'">
+      <ion-item-sliding #item *ngFor="let beacon of beacons">
+        <ion-item (click)="muestraBeacon(beacon)">
+          <ion-avatar item-start>
+            <img src="{{beacon.img}}">
+          </ion-avatar>
+          <h2>{{ beacon.title }}</h2>
+          <p>{{ beacon.description }}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="borrarBeacon(beacon.key)">
+            <ion-icon name="trash"></ion-icon>
+            Borrar
+          </button>
+        </ion-item-options>
+        <ion-item-options side="left">
+          <button ion-button color="warning" (click)="muestraBeacon(beacon)">
+            <ion-icon name="md-create"></ion-icon>
+            Editar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'news'">
+      <ion-item-sliding #item *ngFor="let noticia of noticias">
+        <ion-item [ngStyle]="{'background-color': noticia.color}" (click)="openNews(noticia.id)">
+          <ion-thumbnail item-start>
+            <img src="{{ noticia.img }}">
+          </ion-thumbnail>
+          <h1>{{ noticia.title }}</h1>
+          <h3>{{ noticia.description }}</h3>
+          <!--Muestro la fecha de creación o de actualización de esta noticia-->
+          <!-- <h5 *ngIf="!noticia.updateTime" style="float: left; background-color: #FFFFFF;">🆕 {{noticia.id | date:'dd/MM/yyyy - HH:mm'}}&nbsp;</h5>
+        <h5 *ngIf="noticia.updateTime" style="float: left; background-color: #FFFFFF;">🔁 {{noticia.updateTime | date:'dd/MM/yyyy - HH:mm'}}&nbsp;</h5> -->
+
+          <!--Oculto la siguiente fila si no tiene marcador asociado porque entonces quiere decir que es una noticia y no un evento con fecha de inicio-->
+          <h5 *ngIf="noticia.marker != 'null'" style="float: left; background-color: #FFFFFF;">▶️ {{noticia.startNews}}h&nbsp;</h5>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="borrarNoticia(noticia.id)">
+            <ion-icon name="trash"></ion-icon>
+            Borrar
+          </button>
+        </ion-item-options>
+        <ion-item-options side="left">
+          <button ion-button color="warning" (click)="muestraNoticia(noticia)">
+            <ion-icon name="md-create"></ion-icon>
+            Editar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'markers'">
+      <ion-item-sliding #item *ngFor="let marker of markers">
+        <ion-item (click)="muestraMarcador(marker)">
+          <ion-avatar item-start>
+            <!-- <img src="{{beacon.img}}"> -->
+          </ion-avatar>
+          <h2>{{ marker.title }}</h2>
+          <p>Lat: {{ marker.lat }}, Long: {{marker.lng}}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="borrarMarcador(marker.id)">
+            <ion-icon name="trash"></ion-icon>
+            Borrar
+          </button>
+        </ion-item-options>
+        <ion-item-options side="left">
+          <button ion-button color="warning" (click)="muestraMarcador(marker)">
+            <ion-icon name="md-create"></ion-icon>
+            Editar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'chats'">
+      <ion-item-sliding #item *ngFor="let chat of chats">
+        <ion-item (click)="muestraChatView(chat.id)">
+          <ion-avatar item-start [ngClass]="{'itemColorChatActive' : (chat.active == true), 'itemColorChatDisabled' : (chat.active == false)}">
+            <img src="assets/img/logo_beaconsUPC.png" />
+          </ion-avatar>
+          <h2>{{ chat.title }}</h2>
+          <p>{{chat.description}}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="warning" (click)="borrarMensajesChat(chat.id)">
+            <ion-icon name="trash"></ion-icon>
+            Mensajes
+          </button>
+          <button ion-button color="danger" (click)="borrarChat(chat.id)">
+            <ion-icon name="trash"></ion-icon>
+            Chat
+          </button>
+        </ion-item-options>
+        <ion-item-options side="left">
+          <button ion-button color="warning" (click)="muestraChat(chat)">
+            <ion-icon name="md-create"></ion-icon>
+            Editar
+          </button>
+          <button *ngIf="chat.active == false" ion-button color="secondary" (click)="ponerChatActivo(chat.id)">
+            <ion-icon name="ios-chatbubbles"></ion-icon>
+            Activar
+          </button>
+          <button *ngIf="chat.active == true" ion-button color="danger" (click)="ponerChatInactivo(chat.id)">
+            <ion-icon name="ios-chatbubbles"></ion-icon>
+            Desactivar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'users'">
+      <ion-item-sliding #item *ngFor="let user of users">
+        <ion-item [ngClass]="{'itemColor' : (user.admin == true), 'itemColor2' : (user.tracing == true)}">
+          <!-- [ngClass]="itemColor: user.admin == true"-->
+          <ion-avatar item-start>
+            <!-- <img src="{{beacon.img}}"> -->
+          </ion-avatar>
+          <h2>{{ user.name }} {{user.surname}}</h2>
+          <h3>{{user.email}}</h3>
+          <h5>Ref: {{user.password}}</h5>
+          <p>{{ user.profile }}
+            <span *ngIf="user.school">en la {{user.school}}</span>
+            <span style="float: right">{{user.birthday | date:'dd/MM/yyyy'}}</span>
+          </p>
+
+
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="borrarUsuarioBBDD(user.password)">
+            <ion-icon name="trash"></ion-icon>
+            Borrar
+          </button>
+        </ion-item-options>
+        <ion-item-options side="left">
+          <button *ngIf="user.admin == false" ion-button color="secondary" (click)="hacerUsuarioAdministrador(user.password)">
+            <ion-icon name="person-add"></ion-icon>
+            Admin
+          </button>
+          <button *ngIf="user.admin == true" ion-button color="warning" (click)="eliminarUsuarioAdministrador(user.password)">
+            <ion-icon name="close-circle"></ion-icon>
+            Admin
+          </button>
+          <button *ngIf="user.tracing == false && user.admin == false" ion-button color="default" (click)="ponerUsuarioSeguimiento(user.password)">
+            <ion-icon name="eye"></ion-icon>
+            Seguimiento
+          </button>
+          <button *ngIf="user.tracing == true && user.admin == false" ion-button color="warning" (click)="quitarUsuarioSeguimiento(user.password)">
+            <ion-icon name="close-circle"></ion-icon>
+            Seguimiento
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <!--Botón flotante-->
+  <ion-fab right top edge style="padding-right: 20px">
+    <button ion-fab color="dark">
+      <ion-icon name="add"></ion-icon>
+    </button>
+    <ion-fab-list>
+      <button ion-fab (tap)="nuevoBeacon()">
+        <ion-icon name="ios-disc-outline"></ion-icon>
+      </button>
+      <button ion-fab (tap)="nuevaNoticia()">
+        <ion-icon name="document"></ion-icon>
+      </button>
+      <button ion-fab (tap)="nuevoMarcador()">
+        <ion-icon name="md-pin"></ion-icon>
+      </button>
+      <button ion-fab (tap)="nuevoChat()">
+        <ion-icon name="ios-chatbubbles"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="segment" color="dark">
+      <ion-segment-button value="beacons">
+        <ion-icon name="ios-disc-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="news">
+        <ion-icon name="md-bookmarks"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="markers">
+        <ion-icon name="md-pin"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="chats">
+        <ion-icon name="ios-chatbubbles"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="users">
+        <ion-icon name="md-people"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
+

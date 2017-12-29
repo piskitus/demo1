@@ -52,10 +52,15 @@ export class MyApp {
       { title: 'Documentación', component: 'DocumentationPage', icon: 'attach' },
       { title: 'Imágenes', component: 'ImagesPage', icon: 'images' },
       { title: 'Video', component: 'VideoPage', icon: 'logo-youtube' },
+      { title: 'Beacons', component: 'BeaconsPage', icon: 'ios-disc-outline' },
       { title: 'Email', component: 'EmailPage', icon: 'mail' },
       { title: 'Chat', component: 'ChatPage', icon: 'chatbubbles' },
       { title: 'List', component: ListPage, icon: 'plane' },
-      { title: 'Geofences', component: 'GeofencesPage', icon: 'globe' }
+      { title: 'Geofences', component: 'GeofencesPage', icon: 'globe' },
+      { title: 'Administración', component: 'AdministracionPage', icon: 'build' }
+
+      
+      
     ];
 
   }
@@ -68,18 +73,20 @@ export class MyApp {
       this.splashScreen.hide();
       this.handlerOneSignalNotifications(); //Comentar esta linea para iOS devApp
       this.geofencesProvider.initializeGeofences();
-
   
       this.auth.Session.subscribe(session => {
         if (session) {
 
           setTimeout(() => {
             //this.splashScreen.hide();
+            this.startBeaconProvider();//Inicializo la búsqueda de beacons y regiones
             this.rootPage = HomePage;
+            
 
+            
           }, 3000);
           this.toastSalutation();
-          this.startBeaconProvider();//Inicializo la búsqueda de beacons y regiones
+          
 
         }
         else {

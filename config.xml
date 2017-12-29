@@ -87,4 +87,5 @@
     <plugin name="onesignal-cordova-plugin" spec="^2.2.5" />
     <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.1" />
     <plugin name="cordova-plugin-email-composer" spec="^0.8.11" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.0" />
 </widget>
