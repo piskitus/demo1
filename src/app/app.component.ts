@@ -52,6 +52,7 @@ export class MyApp {
       { title: 'Documentación', component: 'DocumentationPage', icon: 'attach' },
       { title: 'Imágenes', component: 'ImagesPage', icon: 'images' },
       { title: 'Video', component: 'VideoPage', icon: 'logo-youtube' },
+      { title: 'Email', component: 'EmailPage', icon: 'mail' },
       { title: 'Chat', component: 'ChatPage', icon: 'chatbubbles' },
       { title: 'List', component: ListPage, icon: 'plane' },
       { title: 'Geofences', component: 'GeofencesPage', icon: 'globe' }
@@ -128,6 +129,9 @@ export class MyApp {
     this.oneSignal.sendTags({ key1: "value1", key2: "value2" });
     this.oneSignal.getTags().then((tags)=>{
       console.log("tags recibidos: "+JSON.stringify(tags))
+    })
+    this.oneSignal.getIds().then((ids)=>{
+      console.log("ids recibidas: " + JSON.stringify(ids))
     })
   }
 

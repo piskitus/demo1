@@ -14,6 +14,7 @@ import { Geofence } from '@ionic-native/geofence';
 import { UtilitiesProvider } from '../providers/utilities/utilities';
 import { GeofencesProvider } from '../providers/geofences/geofences';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated'; //El deprecated es para la v4, v5 no la uso aún
@@ -62,7 +63,8 @@ export const firebaseConfig = {
     AuthProvider,
     FirebaseDbProvider,
     BeaconProvider,
-    LocalNotifications
+    LocalNotifications,
+    EmailComposer
   ]
 })
 export class AppModule {}
