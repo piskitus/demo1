@@ -16,6 +16,7 @@ import { GeofencesProvider } from '../providers/geofences/geofences';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated'; //El deprecated es para la v4, v5 no la uso aún
@@ -69,7 +70,8 @@ export const firebaseConfig = {
     EmailComposer,
     InAppBrowser,
     OnesignalProvider,
-    OnesignalProvider
+    OnesignalProvider,
+    GoogleMaps
   ]
 })
 export class AppModule {}
