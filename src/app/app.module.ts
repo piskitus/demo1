@@ -15,6 +15,7 @@ import { UtilitiesProvider } from '../providers/utilities/utilities';
 import { GeofencesProvider } from '../providers/geofences/geofences';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated'; //El deprecated es para la v4, v5 no la uso aún
@@ -22,6 +23,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthProvider } from '../providers/auth/auth';
 import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
 import { BeaconProvider } from '../providers/beacon/beacon';
+import { OnesignalProvider } from '../providers/onesignal/onesignal';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAWas-Z3A2DVGswCM6NuRAYHOldEzb3HyE",
@@ -64,7 +66,10 @@ export const firebaseConfig = {
     FirebaseDbProvider,
     BeaconProvider,
     LocalNotifications,
-    EmailComposer
+    EmailComposer,
+    InAppBrowser,
+    OnesignalProvider,
+    OnesignalProvider
   ]
 })
 export class AppModule {}

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ModalController, AlertController } from 'ionic-angular';
 import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
+import { OnesignalProvider } from '../../providers/onesignal/onesignal';
 //import * as moment from 'moment'
 
 @IonicPage()
@@ -18,7 +19,8 @@ export class AdministracionPage {
   users: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
-    public dbFirebase: FirebaseDbProvider, public modalCtrl: ModalController, public alertCtrl: AlertController) {
+    public dbFirebase: FirebaseDbProvider, public modalCtrl: ModalController, public alertCtrl: AlertController,
+    public oneSignal: OnesignalProvider) {
   }
 
   ionViewDidLoad() {
@@ -243,6 +245,16 @@ export class AdministracionPage {
     this.dbFirebase.updateUser(user);
   }
 
+  activarUsuario(userKey, oneSignalId) {
+    let user: any = {
+      password: userKey,
+      active: true
+    }
+    this.dbFirebase.updateUser(user);
+
+    this.oneSignal.sendPushNotification(oneSignalId, "Su cuenta ha sido activada", "Ya puede disfrutar de todos los contenidos")
+  }
+
   eliminarUsuarioAdministrador(userKey) {
     let user: any = {
       password: userKey,
@@ -255,6 +267,14 @@ export class AdministracionPage {
     let user: any = {
       password: userKey,
       tracing: false
+    }
+    this.dbFirebase.updateUser(user);
+  }
+
+  desactivarUsuario(userKey) {
+    let user: any = {
+      password: userKey,
+      active: false
     }
     this.dbFirebase.updateUser(user);
   }

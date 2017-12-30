@@ -169,6 +169,14 @@
             <ion-icon name="close-circle"></ion-icon>
             Seguimiento
           </button>
+                    <button *ngIf="user.active == false" ion-button color="success-color" (click)="activarUsuario(user.password, user.oneSignalUserId)">
+                      <ion-icon name="eye"></ion-icon>
+                      Activar
+                    </button>
+                    <button *ngIf="user.active == true" ion-button color="danger-color" (click)="desactivarUsuario(user.password)">
+                      <ion-icon name="close-circle"></ion-icon>
+                      Desactivar
+                    </button>
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>

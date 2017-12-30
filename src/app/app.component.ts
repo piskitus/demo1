@@ -69,7 +69,10 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
+      //this.statusBar.styleDefault(); //no se ve bien
+      //this.statusBar.overlaysWebView(false); //se fusiona con el header (en false iOS no se fusiona)
+      //this.statusBar.styleDefault()//se ve bien
+      this.statusBar.backgroundColorByHexString('#CCC');
       this.splashScreen.hide();
       this.handlerOneSignalNotifications(); //Comentar esta linea para iOS devApp
       this.geofencesProvider.initializeGeofences();
@@ -80,6 +83,7 @@ export class MyApp {
           setTimeout(() => {
             //this.splashScreen.hide();
             this.startBeaconProvider();//Inicializo la búsqueda de beacons y regiones
+            this.actualizarUsuarioOneSignal();
             this.rootPage = HomePage;
             
 
@@ -137,8 +141,18 @@ export class MyApp {
     this.oneSignal.getTags().then((tags)=>{
       console.log("tags recibidos: "+JSON.stringify(tags))
     })
-    this.oneSignal.getIds().then((ids)=>{
+
+  }
+
+  actualizarUsuarioOneSignal() {
+
+    this.oneSignal.getIds().then((ids) => {
       console.log("ids recibidas: " + JSON.stringify(ids))
+      let user: any = {
+        oneSignalUserId: ids.userId,
+        oneSignalPushToken: ids.pushToken
+      }
+      this.dbFirebase.updateUserLogged(user);
     })
   }
 

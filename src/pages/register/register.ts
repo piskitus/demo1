@@ -20,7 +20,8 @@ export class RegisterPage {
     email: '',
     password: '',
     tracing: false,//para poder hacer seguimiento de un usuario con alguna discapacidad o que requiere asistencia en el campus
-    admin: false //Para poder dar permisos diferentes a los que serán administradores
+    admin: false, //Para poder dar permisos diferentes a los que serán administradores
+    active: false
   };
 
   constructor(

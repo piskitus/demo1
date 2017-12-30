@@ -64,8 +64,12 @@ export class FirebaseDbProvider {
 
   }
 
-  updateUser(user) {
+  updateUser(user) { //update de un user concreto a partir de su identificador único (password encriptado de FB)
     return this.afDB.database.ref('users/' + user.password).update(user)
+  }
+
+  updateUserLogged(user) { //update del user que está logeado
+    return this.afDB.database.ref('users/' + this.auth.getUser()).update(user)
   }
 
   // saveUserData(user){
