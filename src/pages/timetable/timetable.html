@@ -8,6 +8,73 @@
 </ion-header>
 
 
+
+
+
 <ion-content padding>
+  <div [ngSwitch]="segment">
+    <ion-list *ngSwitchCase="'day1'">
+      <h1 text-center>Networking Hour</h1>
+      <h5 text-justify style="color:darkGray">The Meetings Leadership Summit is the high-profile, invitation only event that kicks off ibtm world. This year, it will be
+      held at the Gran Teatre del Liceu, a stunning 19th century opera house located on Las Ramblas.
+      </h5>
+      <img width="100%" height="auto" src="assets/imgs/img2event.jpg" />
+      <h5 text-justify style="color:darkGray">We will be bringing together 150 of the most senior executives in the global MICE industry to dine and network whilst experiencing
+      the splendour of the Liceu. The evening will also include the presentation of three major industry awards for 2017: <br><br><br>
+       •&nbsp;&nbsp;JMIC Power & Profile Award <br><br>
+       •&nbsp;&nbsp;IAPCO Collaboration Award <br><br>
+       •&nbsp;&nbsp;ibtm world Lifetime Achievement Award</h5>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'day2'">
+
+      <h1 text-center>Why IOT is requiring us to rething resiliency at the edge</h1>
+      <h5 text-justify style="color:darkGray">This session will address availability levels needed to support new data demands such as smart cities and remote business
+      branch offices.
+      </h5>
+      <img width="100%" height="auto" src="assets/imgs/img3event.jpg" />
+      <h5 text-justify style="color:darkGray">Learn how business critical edge sites should be designed to achieve high availability as the current paradigm of data center
+      availability is inadequate; its metric is not comprehensive as it does not consider user-interruption based on business criticality
+      and the number of people per site affected.</h5>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'day3'">
+            <h1 text-center>SITE Incentive Seminar</h1>
+            <h5 text-justify style="color:darkGray">Join top incentive travel professionals including SITE members, ibtm world hosted buyers and key industry decision makers
+            for an afternoon of education and networking before ibtm world begins!
+            </h5>
+            <img width="100%" height="auto" src="assets/imgs/img4event.jpg" />
+            <h5 text-justify>Event Agenda</h5>
+            <h6 text-left style="color:darkGray">
+            •&nbsp;&nbsp;14:30 – 15:00 Registration <br><br>
+            •&nbsp;&nbsp;15:00 – 16:00 Keynote Education Session <br><br>
+            •&nbsp;&nbsp;16:00 – 16:30 Coffee Break<br><br>
+            •&nbsp;&nbsp;16:30 – 17:30 Experiential Activity</h6>
+    </ion-list>
+
+
+  </div>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="segment" color="primary-color">
+      <ion-segment-button value="day1">
+        <!-- <ion-icon name="calendar"></ion-icon> -->
+        <div>Día 1</div>
+      </ion-segment-button>
+      <ion-segment-button value="day2">
+        <!-- <ion-icon name="calendar"></ion-icon> -->
+        Día 2
+      </ion-segment-button>
+      <ion-segment-button value="day3">
+        <!-- <ion-icon name="calendar"></ion-icon> -->
+        Día 3
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
+
