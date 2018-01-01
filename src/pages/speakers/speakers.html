@@ -8,6 +8,118 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/pic1.jpg">
+      </ion-avatar>
+      <h2>Finn</h2>
+      <h3>Don't Know What To Do!</h3>
+      <p>I've had a pretty messed up day. If we just...</p>
+      <button ion-button clear item-end icon-only (click)="openView()">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/pic2.jpg">
+      </ion-avatar>
+      <h2>Finn</h2>
+      <h3>Don't Know What To Do!</h3>
+      <p>I've had a pretty messed up day. If we just...</p>
+      <button ion-button clear item-end icon-only (click)="moreInfo()">
+        <ion-icon name="help"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/pic3.jpg">
+      </ion-avatar>
+      <h2>Finn</h2>
+      <h3>Don't Know What To Do!</h3>
+      <p>I've had a pretty messed up day. If we just...</p>
+      <button ion-button clear item-end (click)="viewInfo()">+info</button>
+    </ion-item>
+    <ion-item-sliding #item>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/pic4.jpg">
+      </ion-avatar>
+      <h2>Finn</h2>
+      <h3>Don't Know What To Do!</h3>
+      <p>I've had a pretty messed up day. If we just...</p>
+      <button ion-button clear item-end color="danger">swipe</button>
+    </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger">
+          <ion-icon name="trash"></ion-icon>
+          Test
+        </button>
+      </ion-item-options>
+      <ion-item-options side="left">
+        <button ion-button color="success-color">
+          <ion-icon name="person-add"></ion-icon>
+          Test
+        </button>
+      </ion-item-options>
+      </ion-item-sliding>
+
+
+  <ion-item>
+    <ion-thumbnail item-start>
+      <img src="assets/imgs/pic1.jpg">
+    </ion-thumbnail>
+    <h2>Finn</h2>
+    <h3>Don't Know What To Do!</h3>
+    <p>I've had a pretty messed up day. If we just...</p>
+    <button ion-button clear item-end icon-only (click)="openView()">
+      <ion-icon name="information-circle"></ion-icon>
+    </button>
+  </ion-item>
+  <ion-item>
+    <ion-thumbnail item-start>
+      <img src="assets/imgs/pic2.jpg">
+    </ion-thumbnail>
+    <h2>Finn</h2>
+    <h3>Don't Know What To Do!</h3>
+    <p>I've had a pretty messed up day. If we just...</p>
+    <button ion-button clear item-end icon-only (click)="moreInfo()">
+      <ion-icon name="help"></ion-icon>
+    </button>
+  </ion-item>
+  <ion-item>
+    <ion-thumbnail item-start>
+      <img src="assets/imgs/pic3.jpg">
+    </ion-thumbnail>
+    <h2>Finn</h2>
+    <h3>Don't Know What To Do!</h3>
+    <p>I've had a pretty messed up day. If we just...</p>
+    <button ion-button clear item-end (click)="viewInfo()">+info</button>
+  </ion-item>
+  <ion-item-sliding #item>
+  <ion-item>
+    <ion-thumbnail item-start>
+      <img src="assets/imgs/pic4.jpg">
+    </ion-thumbnail>
+    <h2>Finn</h2>
+    <h3>Don't Know What To Do!</h3>
+    <p>I've had a pretty messed up day. If we just...</p>
+    <button ion-button clear item-end color="danger">swipe</button>
+  </ion-item>
+  <ion-item-options side="right">
+    <button ion-button color="danger">
+      <ion-icon name="trash"></ion-icon>
+      Test
+    </button>
+  </ion-item-options>
+  <ion-item-options side="left">
+    <button ion-button color="success-color">
+      <ion-icon name="person-add"></ion-icon>
+      Test
+    </button>
+  </ion-item-options>
+  </ion-item-sliding>
+  </ion-list>
 
 </ion-content>

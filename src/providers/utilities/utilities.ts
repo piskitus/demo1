@@ -22,7 +22,8 @@ export class UtilitiesProvider {
       duration: duration,
       showCloseButton: close,
       closeButtonText: 'x',
-      cssClass: color
+      cssClass: color,
+      dismissOnPageChange: true,//si cambio de pagina el toast se oculta
     });
     toast.present();
   }
