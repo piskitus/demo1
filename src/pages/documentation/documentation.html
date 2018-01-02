@@ -10,4 +10,22 @@
 
 <ion-content padding>
 
+    <div text-center>
+      <button ion-button color="danger-color" (click)="viewPDF()">PDF integrado (usa app propia)</button>
+    </div>
+
+    <div text-center>
+      <button ion-button color="warning-color" (click)="viewPDFURL()">PDF web (solo va si google pdf)</button>
+    </div>
+
+    <div text-center>
+      <button ion-button color="warning-color" (click)="viewOpener()">PDF File Open (default user app)</button>
+    </div>
+
+        <div text-center>
+          <button ion-button color="success-color" (click)="download()">Download and open</button>
+        </div>
+
+    
+
 </ion-content>

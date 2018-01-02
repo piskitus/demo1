@@ -21,7 +21,11 @@
         "@angular/platform-browser": "5.0.3",
         "@angular/platform-browser-dynamic": "5.0.3",
         "@ionic-native/core": "4.4.0",
+        "@ionic-native/document-viewer": "^4.5.2",
         "@ionic-native/email-composer": "^4.5.2",
+        "@ionic-native/file": "^4.5.2",
+        "@ionic-native/file-opener": "^4.5.2",
+        "@ionic-native/file-transfer": "^4.5.2",
         "@ionic-native/geofence": "^4.5.2",
         "@ionic-native/google-maps": "^4.5.2",
         "@ionic-native/ibeacon": "^4.5.2",
@@ -39,7 +43,11 @@
         "cordova-plugin-badge": "^0.8.5",
         "cordova-plugin-compat": "^1.0.0",
         "cordova-plugin-device": "^1.1.4",
+        "cordova-plugin-document-viewer": "^0.9.7",
         "cordova-plugin-email-composer": "^0.8.11",
+        "cordova-plugin-file": "^4.3.3",
+        "cordova-plugin-file-opener2": "^2.0.19",
+        "cordova-plugin-file-transfer": "^1.6.3",
         "cordova-plugin-geofence": "^0.7.0",
         "cordova-plugin-googlemaps": "^2.1.1",
         "cordova-plugin-ibeacon": "^3.5.2",
@@ -82,7 +90,11 @@
             "cordova-plugin-googlemaps": {
                 "API_KEY_FOR_ANDROID": "AIzaSyCamZqCcentXZBk36v_YVqPLD8BkW32nJ4",
                 "API_KEY_FOR_IOS": "AIzaSyBetQ7fnrQKJSpLAy6U5k-V-rgPi8gXHAo"
-            }
+            },
+            "cordova-plugin-document-viewer": {},
+            "cordova-plugin-file-opener2": {},
+            "cordova-plugin-file": {},
+            "cordova-plugin-file-transfer": {}
         },
         "platforms": [
             "android"
