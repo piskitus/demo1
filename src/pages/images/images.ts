@@ -1,12 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Slides, Content } from 'ionic-angular';
 
-/**
- * Generated class for the ImagesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +9,35 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ImagesPage {
 
+  @ViewChild(Slides) slides: Slides;
+  @ViewChild(Content) content: Content;
+
+  mode:number = 1; //modo 1 = lista, modo 2 = slides
+  autoplayTime:number = null; //para configurar el autoplay
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ImagesPage');
+  }
+
+  startPresentation(){
+    this.mode = 2;
+    this.autoplayTime = 2000;
+    //this.slides.startAutoplay();  
+  }
+
+  listImages(){
+    this.slides.stopAutoplay(); 
+    this.mode = 1;
+    this.autoplayTime = null;
+
+  }
+
+  scrollUp(){
+    this.content.scrollToTop(1000)
   }
 
 }

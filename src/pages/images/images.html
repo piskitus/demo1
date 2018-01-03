@@ -4,10 +4,41 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Imágenes</ion-title>
+    <ion-buttons right>
+      <button *ngIf="mode == 2" ion-button icon-only (click)="listImages()" color="danger-color">
+        <ion-icon name="list"></ion-icon>
+      </button>
+       <button *ngIf="mode == 1" ion-button icon-only (click)="startPresentation()" color="danger-color">
+        <ion-icon name="easel"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <div *ngIf="mode==1">
+  <img width="100%" height="auto" src="assets/imgs/car1.jpg" />
+  <img width="100%" height="auto" src="assets/imgs/car2.jpg" />
+  <img width="100%" height="auto" src="assets/imgs/car3.jpg" />
+  <img width="100%" height="auto" src="assets/imgs/car4.jpg" />
+  <img width="100%" height="auto" src="assets/imgs/car5.jpg" />
+  <img width="100%" height="auto" src="assets/imgs/car6.jpg" />
+  <img width="100%" height="auto" src="assets/imgs/car7.jpg" />
+  <img width="100%" height="auto" src="assets/imgs/car8.jpg" />
+  <img width="100%" height="auto" src="assets/imgs/car9.jpg" />
+  <img width="100%" height="auto" src="assets/imgs/car10.jpg" /> 
+    <div text-center>
+      <button ion-button color="primary-color" (click)="scrollUp()">Go up</button>
+    </div>
+  </div>
+
+  <div *ngIf="mode==2">
+  <ion-slides autoplay={{autoplayTime}} loop="true" effect="slide" pager=true paginationType="progress" zoom=false centeredSlides=true>
+    <ion-slide *ngFor="let image of [1,2,3,4,5,6,7,8,9,10]">
+      <img data-src="./assets/imgs/car{{image}}.jpg">
+    </ion-slide>
+  </ion-slides>
+  </div>
 
 </ion-content>
