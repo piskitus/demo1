@@ -21,6 +21,8 @@ import { DocumentViewer } from '@ionic-native/document-viewer';
 import { FileOpener } from '@ionic-native/file-opener';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+import { VideoPlayer } from '@ionic-native/video-player';
 
 
 import { AngularFireModule } from 'angularfire2';
@@ -81,7 +83,9 @@ export const firebaseConfig = {
     DocumentViewer,
     FileOpener,
     File,
-    FileTransfer
+    FileTransfer,
+    YoutubeVideoPlayer,
+    VideoPlayer
   ]
 })
 export class AppModule {}

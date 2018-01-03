@@ -68,6 +68,12 @@ export class DocumentationPage {
       .catch(e => console.log('Error openening file', e));
   }
 
+  openFromAssets(){
+    this.fileOpener.open('file:///android_asset/www/assets/docs/test2.pdf', 'application/pdf')
+      .then(() => console.log('File is opened'))
+      .catch(e => console.log('Error openening file', e));
+  }
+
   upload() {
     let options: FileUploadOptions = {
       fileKey: 'file',
