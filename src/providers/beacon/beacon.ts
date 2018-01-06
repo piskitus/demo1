@@ -33,6 +33,7 @@ export class BeaconProvider {
   //Bases de datos
   reminders: any;
   classes: any;
+  beaconsddbb: any;
 
 
   today: any;
@@ -52,6 +53,8 @@ export class BeaconProvider {
     weekday[5] = "viernes";
     weekday[6] = "sabado";
     this.today = weekday[d.getDay()];
+
+
   }
 
   start(identifier, uuid): any {//Inicializo los procesos de búsqueda de beacons
@@ -93,6 +96,7 @@ export class BeaconProvider {
         this.enterRegionDisplayNotifications(true);
         this.tracing(); //Función para traquear a los usuarios con seguimiento
         this.insideRegion = true;
+        this.beaconLocalNotifications();
         //this.regionChangeStatus(data.region.identifier, true);
       }
     );
@@ -412,4 +416,28 @@ export class BeaconProvider {
       //console.log("No ejecuto la función de notificación de clase")
     }
   }
+
+  beaconLocalNotifications(){
+
+    this.dbFirebase.getBeacons().subscribe(beaconsdb => {
+      this.beaconsddbb = beaconsdb;
+
+      for(let i=0; i<this.beaconsddbb.length; i++){
+        for (let key in this.beacons) {
+          let beacon = this.beacons[key];
+          console.log(this.beaconsddbb[i].key, "=?=", beacon.key)
+          if(this.beaconsddbb[i].key == beacon.key && this.beaconsddbb[i].notification && this.insideRegion){
+            let not = this.beaconsddbb[i].notification;
+            this.setLocalNotification(not.id, not.title, not.description);
+          }
+        }
+      }
+      
+
+
+
+    })
+
+  }
+
 }

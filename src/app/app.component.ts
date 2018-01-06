@@ -53,6 +53,7 @@ export class MyApp {
       { title: 'Imágenes', component: 'ImagesPage', icon: 'images' },
       { title: 'Video', component: 'VideoPage', icon: 'logo-youtube' },
       { title: 'Beacons', component: 'BeaconsPage', icon: 'ios-disc-outline' },
+      { title: 'Notificaciones', component: 'NotificationsPage', icon: 'megaphone' },
       { title: 'Email', component: 'EmailPage', icon: 'mail' },
       { title: 'Chat', component: 'ChatPage', icon: 'chatbubbles' },
       { title: 'List', component: ListPage, icon: 'plane' },
@@ -74,7 +75,7 @@ export class MyApp {
       //this.statusBar.styleDefault()//se ve bien
       this.statusBar.backgroundColorByHexString('#CCC');
       this.splashScreen.hide();
-      //this.handlerOneSignalNotifications(); //Comentar esta linea para iOS devApp
+      this.handlerOneSignalNotifications(); //Comentar esta linea para iOS devApp
       this.geofencesProvider.initializeGeofences();
   
       this.auth.Session.subscribe(session => {
@@ -82,8 +83,8 @@ export class MyApp {
 
           setTimeout(() => {
             //this.splashScreen.hide();
-            //this.startBeaconProvider();//Inicializo la búsqueda de beacons y regiones
-            //this.actualizarUsuarioOneSignal();
+            this.startBeaconProvider();//Inicializo la búsqueda de beacons y regiones
+            this.actualizarUsuarioOneSignal();
             this.rootPage = HomePage;
             
 
