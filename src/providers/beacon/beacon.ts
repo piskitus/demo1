@@ -432,9 +432,6 @@ export class BeaconProvider {
           }
         }
       }
-      
-
-
 
     })
 

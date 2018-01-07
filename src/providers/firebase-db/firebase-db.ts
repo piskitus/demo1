@@ -182,6 +182,10 @@ export class FirebaseDbProvider {
     this.afDB.database.ref('users/' + this.auth.getUser() + '/news/' + id).remove();
   }
 
+  public deleteBeaconNotification(key){
+    this.afDB.database.ref('beacons/'+key+'notification').remove();
+  }
+
 
 
 

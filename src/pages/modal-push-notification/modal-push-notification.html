@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Notificación Push</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="closeModal()" color="danger-color">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-item>
+    <ion-label color="dark" stacked>Título</ion-label>
+    <ion-input [(ngModel)]="notification.title" maxlength="30" rows="1" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="dark" stacked>Descripción</ion-label>
+    <ion-input [(ngModel)]="notification.description" maxlength="40" rows="1" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Usuario/s asociado/s</ion-label>
+    <ion-select [(ngModel)]="notification.users" name="user-select" multiple="true">
+      <!-- <ion-option value="null">Ninguno</ion-option> -->
+      <ion-option *ngFor="let user of users" value="{{user.oneSignalUserId}}" required>{{user.name}} {{user.surname}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <div text-center>
+    <button ion-button color="success-color" (click)="sendNotification()">Enviar notificación</button>
+  </div>
+
+</ion-content>

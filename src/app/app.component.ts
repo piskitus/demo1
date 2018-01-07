@@ -58,6 +58,7 @@ export class MyApp {
       { title: 'Chat', component: 'ChatPage', icon: 'chatbubbles' },
       { title: 'List', component: ListPage, icon: 'plane' },
       { title: 'Geofences', component: 'GeofencesPage', icon: 'globe' },
+      { title: 'Gráficos', component: 'GraphicsPage', icon: 'pie' },
       { title: 'Administración', component: 'AdministracionPage', icon: 'build' }
 
       

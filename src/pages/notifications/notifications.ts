@@ -21,4 +21,9 @@ export class NotificationsPage {
     modal.present();
   }
 
+  openPushNotification() {
+    let modal = this.modalCtrl.create('ModalPushNotificationPage');
+    modal.present();
+  }
+
 }
