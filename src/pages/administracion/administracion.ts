@@ -54,33 +54,45 @@ export class AdministracionPage {
 
   muestraNoticia(noticia) {
     // aquí vamos a abrir el modal para añadir nuestro sitio.
-    let modalNews = this.modalCtrl.create('ModalAddNewsPage', noticia);
-    modalNews.present();
+    // let modalNews = this.modalCtrl.create('ModalAddNewsPage', noticia);
+    // modalNews.present();
+    this.navCtrl.push('ModalAddNewsPage', noticia);
+
   }
 
   openNews(newsID) {
-    let modal = this.modalCtrl.create('NewsViewPage', { id: newsID });
-    modal.present();
+    // let modal = this.modalCtrl.create('NewsViewPage', { id: newsID });
+    // modal.present();
+    this.navCtrl.push('NewsViewPage', { id: newsID });
+
   }
 
   muestraBeacon(beacon) {
-    let modalBeacon = this.modalCtrl.create('ModalAddBeaconPage', beacon);
-    modalBeacon.present();
+    // let modalBeacon = this.modalCtrl.create('ModalAddBeaconPage', beacon);
+    // modalBeacon.present();
+    this.navCtrl.push('ModalAddBeaconPage', beacon);
+
   }
 
   muestraMarcador(marker) {
-    let modalMarker = this.modalCtrl.create('ModalAddMarkerPage', marker);
-    modalMarker.present();
+    // let modalMarker = this.modalCtrl.create('ModalAddMarkerPage', marker);
+    // modalMarker.present();
+    this.navCtrl.push('ModalAddMarkerPage', marker);
+
   }
 
   muestraChat(chat) {
-    let modal = this.modalCtrl.create('ModalAddChatPage', chat);
-    modal.present();
+    // let modal = this.modalCtrl.create('ModalAddChatPage', chat);
+    // modal.present();
+    this.navCtrl.push('ModalAddChatPage', chat);
+
   }
 
   muestraChatView(chatID) {
-    let modal = this.modalCtrl.create('ChatViewPage', { id: chatID });
-    modal.present();
+    // let modal = this.modalCtrl.create('ChatViewPage', { id: chatID });
+    // modal.present();
+    this.navCtrl.push('ChatViewPage', { id: chatID });
+
   }
 
 
@@ -312,26 +324,31 @@ export class AdministracionPage {
       marker: 'null',
       img: 'assets/img/logo_beaconsUPC.png'
     }
-    let modalNoticia = this.modalCtrl.create('ModalAddNewsPage', newsDefault);
-    modalNoticia.present();
+    // let modalNoticia = this.modalCtrl.create('ModalAddNewsPage', newsDefault);
+    // modalNoticia.present();
+    this.navCtrl.push('ModalAddNewsPage');
   }
 
   nuevoBeacon() {
-    let modalBeacon = this.modalCtrl.create('ModalAddBeaconPage'/*, Aquí puede ir info*/);
-    modalBeacon.present();
+    // let modalBeacon = this.modalCtrl.create('ModalAddBeaconPage'/*, Aquí puede ir info*/);
+    // modalBeacon.present();
+    this.navCtrl.push('ModalAddBeaconPage');
   }
 
   nuevoMarcador() {
-    let modalMarcador = this.modalCtrl.create('ModalAddMarkerPage'/*, Aquí puede ir info*/);
-    modalMarcador.present();
+    // let modalMarcador = this.modalCtrl.create('ModalAddMarkerPage'/*, Aquí puede ir info*/);
+    // modalMarcador.present();
+    this.navCtrl.push('ModalAddMarkerPage');
   }
 
   nuevoChat() {
     let chat: any = {
       active: true
     }
-    let modal = this.modalCtrl.create('ModalAddChatPage', chat);
-    modal.present();
+    // let modal = this.modalCtrl.create('ModalAddChatPage', chat);
+    // modal.present();
+    this.navCtrl.push('ModalAddChatPage');
+
   }
 
 }

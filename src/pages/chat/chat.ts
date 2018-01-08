@@ -1,12 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, Content } from 'ionic-angular';
+import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
+import { BeaconProvider } from '../../providers/beacon/beacon';
 
-/**
- * Generated class for the ChatPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +11,95 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChatPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  chatStatus:boolean = false;
+
+  @ViewChild(Content) content: Content;
+
+  scrollToBottom() {
+    console.log("EJECUTO SCROLL TO BOTTOM")
+    setTimeout(() => {
+      this.content.scrollToBottom(300);
+    }, 500);
+
+  }
+
+
+  chat: any = {
+    active: true
+  };
+  chatID: any;
+  user: any = {
+    name: null,
+    surname: null,
+    key: null
+  };
+  messages: any;// mensajes descargados
+  message: any = {
+    msg: null
+  };//mensaje pendiente de enviar
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private dbFirebase: FirebaseDbProvider,
+    public alertCtrl: AlertController, private beaconProvider: BeaconProvider) {
+    //console.log("this.chatID", this.navParams.data)
+    //this.chat = this.navParams.data;
+    this.chatID = this.navParams.get('id');
+    console.log("this.chat", this.chatID)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatPage');
+    console.log('ionViewDidLoad ChatViewPage');
+
+    this.scrollToBottom();
+    
+
+    //TODO: hacer que se llame solo cuando cambie (suscribe)
+    setInterval(() => { //Para definir un intervalo
+      this.chatStatus = this.beaconProvider.getRegionStatus();
+    }, 1000);//Cada 5 segundos
+
   }
+
+  ionViewDidEnter() {//Cada vez que entro a administración
+
+    var chat = this.dbFirebase.getSpecificChat2(this.chatID);
+    chat.on('value', snapshot => {
+      this.chat = snapshot.val();
+    });
+
+
+    //Cargo los datos de la BBDD
+    this.dbFirebase.getMessagesFromChat(this.chatID).subscribe(messages => {
+      this.messages = messages;
+      // cuando recibo un mensaje nuevo hago scroll down
+      this.scrollToBottom();
+    })
+
+    this.dbFirebase.getUserData().then((user) => {
+      this.user.name = user.val().name;
+      this.user.surname = user.val().surname;
+      this.user.key = user.val().password;
+      //this.user.admin = user.val().admin // por si quiero destacar de alguna manera a los que son admin en el chat
+    })
+
+  }
+
+  cerrarChat() {
+    //this.viewCtrl.dismiss();
+    this.navCtrl.pop();
+  }
+
+  enviarMensaje() {
+    let message = {
+      msg: this.message.msg,
+      userName: this.user.name + ' ' + this.user.surname,
+      userKey: this.user.key
+    }
+    this.dbFirebase.createChatMessage(this.chatID, message).then(res => {
+      console.log('mesaje creado');
+      this.message.msg = null;
+    })
+  }
+
+  
 
 }

@@ -1,21 +1,20 @@
-<ion-header>
+d<ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Chat {{chatStatus}}</ion-title>
+    <ion-title>{{chat.title}}</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="cerrarChat()">
+     <ion-icon name="md-close"></ion-icon>
+   </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
-
 
 <ion-content>
 
   <div class="speech-wrapper" *ngFor="let message of messages" style="position: initial !important">
     <div class="bubble" *ngIf="message.userKey != user.key">
       <div class="txt">
-        <p class="name">{{message.userName}}
-          <span class="timestamp">{{message.id | date:'H:mm'}}</span>
-        </p>
+        <p class="name">{{message.userName}} <span class="timestamp">{{message.id | date:'H:mm'}}</span></p>
         <p class="message">{{message.msg}}</p>
       </div>
       <div class="bubble-arrow"></div>
@@ -23,22 +22,18 @@
     <!--  Speech Bubble alternative -->
     <div class="bubble alt" *ngIf="message.userKey == user.key">
       <div class="txt">
-        <p class="name alt">{{message.userName}}
-          <span class="timestamp">{{message.id | date:'H:mm'}}</span>
-        </p>
+        <p class="name alt">{{message.userName}}<span class="timestamp">{{message.id | date:'H:mm'}}</span></p>
         <p class="message">{{message.msg}}</p>
       </div>
       <div class="bubble-arrow alt"></div>
     </div>
   </div>
 
-  <ion-card *ngIf="chatStatus == false">
-    <!-- se muestra cuando el chat está inactivo para informar al usuario de porqué no puede escribir-->
+  <ion-card *ngIf="chat.active == false"><!-- se muestra cuando el chat está inactivo para informar al usuario de porqué no puede escribir-->
     <ion-card-content>
       <ion-row>
         <ion-col col-12>
-          <p style="text-align: justify"> ℹ️ Debes estar dentro del evento para interactuar en el chat.
-            </p>
+          <p style="text-align: justify"> ℹ️ Este chat se encuentra actualmente deshabilitado. Estará operativo de nuevo en cuanto un administrador lo active. </p>
         </ion-col>
         <!-- <ion-col col-2 align-self-center>
           <button ion-button large clear icon-only (click)="closeCardInfo()">
@@ -56,13 +51,13 @@
     <ion-row>
       <ion-col col-10>
         <ion-item>
-          <ion-input [disabled]="chatStatus == false" placeholder="Escribe aquí..." [(ngModel)]="message.msg" clearInput></ion-input>
+          <ion-input [disabled]="chat.active == false" placeholder="Escribe aquí..." [(ngModel)]="message.msg" clearInput></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-2 style="padding: 0 !important">
-        <button [disabled]="chatStatus == false" color="dark" ion-button icon-only clear large style="margin: 0 !important" (click)="enviarMensaje()">
-          <ion-icon name="md-send"></ion-icon>
-        </button>
+          <button [disabled]="chat.active == false" color="dark" ion-button icon-only clear large style="margin: 0 !important" (click)="enviarMensaje()">
+            <ion-icon name="md-send"></ion-icon>
+          </button>
       </ion-col>
     </ion-row>
   </ion-toolbar>

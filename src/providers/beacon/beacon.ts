@@ -203,7 +203,8 @@ export class BeaconProvider {
 
   getRegionStatus(): any {
     console.log("🔆 getRegionStatus")
-    return this.regionStatusInfo[0];
+    //return this.regionStatusInfo[0];
+    return this.insideRegion;
   }
 
   setLocalNotification(id, title, text) {
@@ -436,5 +437,7 @@ export class BeaconProvider {
     })
 
   }
+
+
 
 }
