@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{news.title}}</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="cerrarNoticia()">
+     <ion-icon name="md-close"></ion-icon>
+   </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content style="background-color: #333">
+
+  <ion-card *ngIf="view" [ngStyle]="{'background-color': news.color}">
+    <img *ngIf="news.img == ''" src="assets/img/logo_beaconsUPC.png" />
+    <img *ngIf="news.img != ''" src="{{ news.img }}"/>
+    <ion-card-content style="padding: 5px 15px !important">
+      <h1 style="text-align: center">{{news.title}}</h1>
+      <ion-card-title text-center>
+        <h3 style="text-align: justify">{{news.description}}</h3>
+      </ion-card-title>
+      <div style="text-align: center">
+      <button (click)=openNewsMarkerInMapButton(news.marker) *ngIf="news.marker != 'null'" text-center ion-button clear round icon-end large color="danger" style="background-color: white">
+        <h1 style="color: black">{{news.startNews}}h</h1>
+        <ion-icon name='pin' is-active="false"></ion-icon>
+      </button>  
+      </div>
+    </ion-card-content>
+
+    <ion-row no-padding *ngIf="news.id || news.url">
+      <ion-col col-12 *ngIf="news.url">
+        <button ion-button block color="dark" icon-start (click)=openURL(news.url)>
+      <ion-icon name='information-circle'></ion-icon>
+      Más info
+    </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>

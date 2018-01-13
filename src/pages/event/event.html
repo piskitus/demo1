@@ -4,15 +4,76 @@
       <ion-icon name="menu"></ion-icon>
       <ion-icon name="star"></ion-icon>
     </button>
-    <ion-title>Presentación evento</ion-title>
+    <ion-title>Evento</ion-title>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
+  <div padding *ngIf="!infoShow">
     <h1 text-center>Bienvenid@ al congreso internacional</h1>
     <img width="100%" height="auto" src="assets/imgs/img1event.jpg" />
     <h4 text-justify style="color:darkGray">Te agradecemos el uso de esta aplicación durante la celebración del evento. Ponemos a tu disposición toda la información
     genérica a través del menú izquierdo. Asimismo, las opciones de geolocalización que incorpora nos permiten comunicar contigo
     de forma personalizada en función de tus necesidades específicas.</h4>
+  </div>
+
+
+   <ion-card *ngIf="infoShow && cardInfoShow">
+        <ion-card-content>
+          <ion-row>
+            <ion-col col-10>
+              <p style="text-align: justify"> ℹ️ Has entrado al evento. Te iremos mostrando información de las diferentes zonas en función de tu ubicación </p>
+            </ion-col>
+            <ion-col col-2 align-self-center>
+              <button ion-button large clear icon-only (click)="closeCardInfo()">
+              <ion-icon name="close-circle"></ion-icon>
+            </button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+
+  <ion-card *ngIf="infoShow && news.id" [ngStyle]="{'background-color': news.color}" (swipe)="swipeEvent($event)">
+    <img *ngIf="news.img == ''" src="assets/imgs/accuracy_logo.png" />
+    <img *ngIf="news.img != ''" src="{{ news.img }}" />
+    <ion-card-content style="padding: 5px 15px !important">
+      <h1 style="text-align: center">{{news.title}}</h1>
+      <ion-card-title text-center>
+        <h3 style="text-align: justify">{{news.description}}</h3>
+      </ion-card-title>
+      <div style="text-align: center">
+        <button (click)=openNewsMarkerInMapButton(news.marker) *ngIf="news.marker != 'null'" text-center ion-button clear round icon-end
+          large color="danger" style="background-color: white">
+          <!-- <h1 style="color: black">{{news.startNews | date:'dd/MM/yyyy - HH:mm'}}h</h1> -->
+          <h1 style="color: black">{{news.startNews}}h</h1>
+          <ion-icon name='pin' is-active="false"></ion-icon>
+        </button>
+      </div>
+    </ion-card-content>
+  
+    <ion-row no-padding *ngIf="news.id || news.url">
+      <ion-col col-12 *ngIf="news.id && !news.url">
+        <button ion-button block color="dark" icon-start (click)=saveUserNews()>
+          <ion-icon name='star'></ion-icon>
+          Guardar
+        </button>
+      </ion-col>
+      <ion-col col-6 *ngIf="news.id && news.url">
+        <button ion-button block color="dark" icon-start (click)=saveUserNews()>
+          <ion-icon name='star'></ion-icon>
+          Guardar
+        </button>
+      </ion-col>
+      <ion-col col-6 *ngIf="news.url">
+        <button ion-button block color="dark" icon-start (click)=openURL(news.url)>
+          <ion-icon name='information-circle'></ion-icon>
+          Más info
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+
 </ion-content>
